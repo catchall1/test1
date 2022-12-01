@@ -104,7 +104,7 @@
                         external_id: uuid
                     }
                     if (typeof fbq != 'undefined' && fbq) {
-                        fbq('init', '<%= @token %>', options);
+                        fbq('init', '2186106761571886', options);
                         fbq('track', 'PageView', options);
                     } else {
                         console.log('[params rewriting] no fbq pixel source to init');
@@ -115,29 +115,24 @@
                     };
  
                     var leadFormComponents = document.querySelectorAll("[data-controller=lead-forms--component]");
- 					var nread =  document.querySelectorAll("[data-controller=link-redirect]");
                     var pageLinks = document.querySelectorAll("a");
                     var forms = document.querySelectorAll("form");
                     var answers = document.querySelectorAll(".button.answer[onclick]")
                     var redirectableEl = document.querySelectorAll("[data-redirect]");
                     var newTabRedirectableEl = document.querySelectorAll("[data-new-tab-redirect]");
- 
+		    var nread =  document.querySelectorAll("[data-controller=link-redirect]");
+
  
                     console.log('leadFormComponents', leadFormComponents)
                     console.log('forms', forms)
                     window.addEventListener('DOMContentLoaded', (event) => {
                         console.log('DOM fully loaded and parsed');
                         console.log("dom ready leadform", document.querySelectorAll("[data-controller=lead-forms--component]"))
-                    });
-     Array.from(leadFormComponents).forEach(leadFormComponent => {
+			});
+
+		
+                    Array.from(leadFormComponents).forEach(leadFormComponent => {
                         var submitRedirectAttr = 'data-lead-forms--component-submit-redirect-url-value'
-                        var popupRedirectAttr = 'data-lead-forms--component-submit-popup-url-value'
-                        var redirectLink = leadFormComponent.getAttribute(submitRedirectAttr)
-                        var popupRedirect = leadFormComponent.getAttribute(popupRedirectAttr)
-                        if (redirectLink) leadFormComponent.setAttribute(submitRedirectAttr, addParamsToUrl(redirectLink)("&sub5=" + uuid));
-                        if (popupRedirect) leadFormComponent.setAttribute(popupRedirectAttr, addParamsToUrl(popupRedirect)("&sub5=" + uuid));
-                    Array.from(nread).forEach(leadFormComponent => {
-                        var submitRedirectAttr = 'data-link-redirect-current-tab-url-value'
                         var popupRedirectAttr = 'data-lead-forms--component-submit-popup-url-value'
                         var redirectLink = leadFormComponent.getAttribute(submitRedirectAttr)
                         var popupRedirect = leadFormComponent.getAttribute(popupRedirectAttr)
@@ -153,7 +148,11 @@
                     Array.from(redirectableEl).forEach(form => {
                         var redirect_link = form.getAttribute('data-redirect')
                         if (redirect_link) form.setAttribute('data-redirect', addParamsToUrl(redirect_link)("&sub5=" + uuid));
-                    })
+									    })
+                    Array.from(nread).forEach(form => {
+                        var redirect_link = form.getAttribute('data-link-redirect-current-tab-url-value')
+                        if (redirect_link) form.setAttribute('data-redirect', addParamsToUrl(redirect_link)("&sub5=" + uuid));
+                    })									    
                     Array.from(newTabRedirectableEl).forEach(form => {
                         var new_tab_redirect_link = form.getAttribute('data-new-tab-redirect')
                         if (new_tab_redirect_link) form.setAttribute('data-new-tab-redirect', addParamsToUrl(new_tab_redirect_link)("&sub5=" + uuid));
