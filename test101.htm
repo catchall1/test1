@@ -32,12 +32,7 @@
   </style>
 </head>
 
-<body data-lander-page-id="3" 
-data-controller="modal event-tracker" 
-data-modal-hidden-class="!hidden" 
-data-session-location="" 
-data-hidden-referrer="" 
-data-action="click-&gt;event-tracker#handleClick" id="isou">
+<body id="isou">
 
 
 
@@ -72,7 +67,7 @@ data-action="click-&gt;event-tracker#handleClick" id="isou">
 
 
 
-<script type="text/javascript" id="ipl4t" data-controller="snippets--predefined-templates--fbq-uuid-to-sub-five-controller">
+script type="text/javascript" id="ipl4t" data-controller="snippets--predefined-templates--fbq-uuid-to-sub-five-controller">
     !function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
         n = f.fbq = function () {
@@ -120,6 +115,7 @@ data-action="click-&gt;event-tracker#handleClick" id="isou">
                     };
  
                     var leadFormComponents = document.querySelectorAll("[data-controller=lead-forms--component]");
+ 					var nread =  document.querySelectorAll("[data-controller=link-redirect]");
                     var pageLinks = document.querySelectorAll("a");
                     var forms = document.querySelectorAll("form");
                     var answers = document.querySelectorAll(".button.answer[onclick]")
@@ -133,8 +129,15 @@ data-action="click-&gt;event-tracker#handleClick" id="isou">
                         console.log('DOM fully loaded and parsed');
                         console.log("dom ready leadform", document.querySelectorAll("[data-controller=lead-forms--component]"))
                     });
-                    Array.from(leadFormComponents).forEach(leadFormComponent => {
+     Array.from(leadFormComponents).forEach(leadFormComponent => {
                         var submitRedirectAttr = 'data-lead-forms--component-submit-redirect-url-value'
+                        var popupRedirectAttr = 'data-lead-forms--component-submit-popup-url-value'
+                        var redirectLink = leadFormComponent.getAttribute(submitRedirectAttr)
+                        var popupRedirect = leadFormComponent.getAttribute(popupRedirectAttr)
+                        if (redirectLink) leadFormComponent.setAttribute(submitRedirectAttr, addParamsToUrl(redirectLink)("&sub5=" + uuid));
+                        if (popupRedirect) leadFormComponent.setAttribute(popupRedirectAttr, addParamsToUrl(popupRedirect)("&sub5=" + uuid));
+                    Array.from(nread).forEach(leadFormComponent => {
+                        var submitRedirectAttr = 'data-link-redirect-current-tab-url-value'
                         var popupRedirectAttr = 'data-lead-forms--component-submit-popup-url-value'
                         var redirectLink = leadFormComponent.getAttribute(submitRedirectAttr)
                         var popupRedirect = leadFormComponent.getAttribute(popupRedirectAttr)
