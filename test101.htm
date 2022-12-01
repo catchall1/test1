@@ -70,74 +70,7 @@ data-action="click-&gt;event-tracker#handleClick" id="isou">
   </style>
 </div>
 
-<script type='text/javascript'>
-    Promise.resolve().then(function() {
-        var addParamsToUrl = function(url) {
-            return params =>
-                url + (url.indexOf("?") !== -1 ? "&" : "?") + params.substr(1);
-        };
- 
-        var addCurrentParamsToUrl = function (url) {
-          const currentParams = window.location.search
-          return addParamsToUrl(url)(currentParams)
-        }
- 
-        var leadFormComponents = document.querySelectorAll("[data-controller=lead-forms--component]");
-        var pageLinks = document.querySelectorAll("a");
-        var forms = document.querySelectorAll("form");
-        var answers = document.querySelectorAll(".button.answer[onclick]")
-        var redirectableEl = document.querySelectorAll("[data-redirect]");
-        var newTabRedirectableEl = document.querySelectorAll("[data-new-tab-redirect]");
- 
-        var setParams = (currentUrl) => addCurrentParamsToUrl(currentUrl);
-        Array.from(pageLinks).forEach(link => {
-            var href = link.href;
-            link.href = setParams(href);
-        });
-        Array.from(leadFormComponents).forEach(leadFormComponent => {
-            var submitRedirectAttr = 'data-lead-forms--component-submit-redirect-url-value'
-            var popupRedirectAttr = 'data-lead-forms--component-submit-popup-url-value'
-            var redirectLink = leadFormComponent.getAttribute(submitRedirectAttr)
-            var popupRedirect = leadFormComponent.getAttribute(popupRedirectAttr)
-            if (redirectLink) leadFormComponent.setAttribute(submitRedirectAttr, setParams(redirectLink));
-            if (popupRedirect) leadFormComponent.setAttribute(popupRedirectAttr, setParams(popupRedirect));
-        })
-        Array.from(forms).forEach(form => {
-            var redirectLink = form.getAttribute('redirect_link')
-            var newTabRedirectLink = form.getAttribute('new_tab_redirect_link')
-            if (redirectLink) form.setAttribute('redirect_link', setParams(redirectLink));
-            if (newTabRedirectLink) form.setAttribute('new_tab_redirect_link', setParams(newTabRedirectLink));
-        })
-        Array.from(redirectableEl).forEach(form => {
-            var redirectLink = form.getAttribute('data-redirect')
-            if (redirectLink) form.setAttribute('data-redirect', setParams(redirectLink));
-        })
-        Array.from(newTabRedirectableEl).forEach(form => {
-            var newTabRedirectLink = form.getAttribute('data-new-tab-redirect')
-            if (newTabRedirectLink) form.setAttribute('data-new-tab-redirect', setParams(newTabRedirectLink));
-        })
-        var extractUrlFromHandler = (clickHandlerStr) => {
-            return clickHandlerStr.slice(clickHandlerStr.indexOf('https'), clickHandlerStr.lastIndexOf("'"));
-        }
-        var extractEverythingBeforeUrl = (clickHandlerStr) => {
-            return clickHandlerStr.slice(0, clickHandlerStr.indexOf('https'))
-        }
-        var extractEverythingAfterUrl = (clickHandlerStr) => {
-            return clickHandlerStr.slice(clickHandlerStr.lastIndexOf("'"), clickHandlerStr.length)
-        }
-        var formatNewHandler = (oldHandlerStr, url) => {
-            return `${extractEverythingBeforeUrl(oldHandlerStr)}${url}${extractEverythingAfterUrl(oldHandlerStr)}`
-        }
-        Array.from(answers).forEach(answer => {
-            var clickHandlerStr = answer.getAttribute("onclick")
-            if (extractUrlFromHandler(clickHandlerStr)) {
-                var parsedUrl = setParams(clickHandlerStr)
-                answer.setAttribute('onclick', formatNewHandler(clickHandlerStr, parsedUrl))
-            }
-        })
- 
-    });
-</script>
+
 
 <script type="text/javascript" id="ipl4t" data-controller="snippets--predefined-templates--fbq-uuid-to-sub-five-controller">
     !function (f, b, e, v, n, t, s) {
