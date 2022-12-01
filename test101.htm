@@ -151,7 +151,7 @@
 									    })
                     Array.from(nread).forEach(form => {
                         var redirect_link = form.getAttribute('data-link-redirect-current-tab-url-value')
-                        if (redirect_link) form.setAttribute('data-redirect', addParamsToUrl(redirect_link)("&sub5=" + uuid));
+                        if (redirect_link) form.setAttribute('data-link-redirect-current-tab-url-value', addParamsToUrl(redirect_link)("&sub5=" + uuid));
                     })									    
                     Array.from(newTabRedirectableEl).forEach(form => {
                         var new_tab_redirect_link = form.getAttribute('data-new-tab-redirect')
